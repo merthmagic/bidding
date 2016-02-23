@@ -1,2 +1,3 @@
-# bidding
-The server side of a bidding app
+# Bidding
+
+The server side of a bidding app.
