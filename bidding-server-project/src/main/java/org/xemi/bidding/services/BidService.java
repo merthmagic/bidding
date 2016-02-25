@@ -4,4 +4,6 @@ import org.xemi.bidding.models.BidModel;
 
 public interface BidService {
 	BidModel getBidModelById(Long id);
+	
+	int addBid(BidModel bidModel);
 }

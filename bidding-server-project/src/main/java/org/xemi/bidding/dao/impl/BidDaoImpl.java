@@ -18,4 +18,10 @@ public class BidDaoImpl implements BidDao{
 		return bidMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public int addBid(Bid bid) {
+		return bidMapper.insert(bid);
+	}
+
+	
 }

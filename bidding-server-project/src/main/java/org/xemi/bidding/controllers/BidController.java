@@ -14,11 +14,16 @@ public class BidController extends BaseController{
 	@Autowired
 	private BidService bidService;
 	
-	@RequestMapping(value="/bid/{id}",method=RequestMethod.GET)
+	@RequestMapping(value="/bids/{id}",method=RequestMethod.GET)
 	public BidModel getBidModelById(@PathVariable Long id){
 		BidModel bidModel = bidService.getBidModelById(id);
 		if(bidModel == null)
 			response.setStatus(404);
 		return bidModel;
+	}
+	
+	@RequestMapping(value="/bids",method=RequestMethod.POST)
+	public void addBid(BidModel bidModel){
+		
 	}
 }

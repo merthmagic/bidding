@@ -4,4 +4,6 @@ import org.xemi.bidding.entity.Bid;
 
 public interface BidDao {
 	Bid getBidById(Long id);
+	
+	int addBid(Bid bid);
 }

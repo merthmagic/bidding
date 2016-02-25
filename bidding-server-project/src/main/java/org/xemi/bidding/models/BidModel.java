@@ -1,5 +1,8 @@
 package org.xemi.bidding.models;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 public class BidModel {
 	private Long id;
 	
@@ -10,7 +13,19 @@ public class BidModel {
 	private String description;
 	
 	private Integer status;
-
+	
+	private Date createdOn;
+	
+	private boolean isDraft;
+	
+	private Date modifiedOn;
+	
+	private Date publishedOn;
+	
+	private BigDecimal amount;
+	
+	private UserSummaryModel userSummary;
+	
 	public Long getId() {
 		return id;
 	}
@@ -49,6 +64,54 @@ public class BidModel {
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public boolean isDraft() {
+		return isDraft;
+	}
+
+	public void setDraft(boolean isDraft) {
+		this.isDraft = isDraft;
+	}
+
+	public Date getModifiedOn() {
+		return modifiedOn;
+	}
+
+	public void setModifiedOn(Date modifiedOn) {
+		this.modifiedOn = modifiedOn;
+	}
+
+	public Date getPublishedOn() {
+		return publishedOn;
+	}
+
+	public void setPublishedOn(Date publishedOn) {
+		this.publishedOn = publishedOn;
+	}
+
+	public UserSummaryModel getUserSummary() {
+		return userSummary;
+	}
+
+	public void setUserSummary(UserSummaryModel userSummary) {
+		this.userSummary = userSummary;
+	}
+
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
 	}
 	
 	

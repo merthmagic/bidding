@@ -30,4 +30,13 @@ public class BidServiceImpl implements BidService{
 		return bidModel;
 	}
 
+	@Override
+	public int addBid(BidModel bidModel) {
+		Bid bid = new Bid();
+		
+		
+		return bidDao.addBid(bid);
+	}
+	
+	
 }

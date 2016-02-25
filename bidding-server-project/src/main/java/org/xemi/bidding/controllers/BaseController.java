@@ -6,7 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-public class BaseController {
+public abstract class BaseController {
 	protected HttpServletRequest request;  
     protected HttpServletResponse response;  
     protected HttpSession session;  
@@ -15,6 +15,6 @@ public class BaseController {
     public void setReqAndRes(HttpServletRequest request, HttpServletResponse response){  
         this.request = request;  
         this.response = response;  
-        this.session = request.getSession();  
+        this.session = request.getSession();
     }  
 }
