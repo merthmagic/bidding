@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    username: root
+    password: 
+    url: jdbc:mysql://localhost:3306/bidding
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapperLocations: classpath:org/xemi/bidding/mapper/*.xml
+  

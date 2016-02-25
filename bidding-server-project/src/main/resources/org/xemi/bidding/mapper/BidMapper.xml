@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.xemi.bidding.mapper.BidMapper" >
+  <resultMap id="BaseResultMap" type="org.xemi.bidding.entity.Bid" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="bid_number" property="bidNumber" jdbcType="VARCHAR" />
+    <result column="owner_id" property="ownerId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="draft" property="draft" jdbcType="TINYINT" />
+    <result column="created_on" property="createdOn" jdbcType="TIMESTAMP" />
+    <result column="modifed_on" property="modifedOn" jdbcType="TIMESTAMP" />
+    <result column="published_on" property="publishedOn" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="location_id" property="locationId" jdbcType="INTEGER" />
+    <result column="sort_order" property="sortOrder" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="org.xemi.bidding.entity.Bid" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, bid_number, owner_id, title, amount, draft, created_on, modifed_on, published_on, 
+    status, location_id, sort_order
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bids
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from bids
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="org.xemi.bidding.entity.Bid" >
+    insert into bids (id, bid_number, owner_id, 
+      title, amount, draft, 
+      created_on, modifed_on, published_on, 
+      status, location_id, sort_order, 
+      description)
+    values (#{id,jdbcType=BIGINT}, #{bidNumber,jdbcType=VARCHAR}, #{ownerId,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{draft,jdbcType=TINYINT}, 
+      #{createdOn,jdbcType=TIMESTAMP}, #{modifedOn,jdbcType=TIMESTAMP}, #{publishedOn,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{locationId,jdbcType=INTEGER}, #{sortOrder,jdbcType=INTEGER}, 
+      #{description,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.xemi.bidding.entity.Bid" >
+    insert into bids
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="bidNumber != null" >
+        bid_number,
+      </if>
+      <if test="ownerId != null" >
+        owner_id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="draft != null" >
+        draft,
+      </if>
+      <if test="createdOn != null" >
+        created_on,
+      </if>
+      <if test="modifedOn != null" >
+        modifed_on,
+      </if>
+      <if test="publishedOn != null" >
+        published_on,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="sortOrder != null" >
+        sort_order,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="bidNumber != null" >
+        #{bidNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="draft != null" >
+        #{draft,jdbcType=TINYINT},
+      </if>
+      <if test="createdOn != null" >
+        #{createdOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifedOn != null" >
+        #{modifedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishedOn != null" >
+        #{publishedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="sortOrder != null" >
+        #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="org.xemi.bidding.entity.Bid" >
+    update bids
+    <set >
+      <if test="bidNumber != null" >
+        bid_number = #{bidNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerId != null" >
+        owner_id = #{ownerId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="draft != null" >
+        draft = #{draft,jdbcType=TINYINT},
+      </if>
+      <if test="createdOn != null" >
+        created_on = #{createdOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifedOn != null" >
+        modifed_on = #{modifedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishedOn != null" >
+        published_on = #{publishedOn,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=INTEGER},
+      </if>
+      <if test="sortOrder != null" >
+        sort_order = #{sortOrder,jdbcType=INTEGER},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="org.xemi.bidding.entity.Bid" >
+    update bids
+    set bid_number = #{bidNumber,jdbcType=VARCHAR},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      draft = #{draft,jdbcType=TINYINT},
+      created_on = #{createdOn,jdbcType=TIMESTAMP},
+      modifed_on = #{modifedOn,jdbcType=TIMESTAMP},
+      published_on = #{publishedOn,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=INTEGER},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.xemi.bidding.entity.Bid" >
+    update bids
+    set bid_number = #{bidNumber,jdbcType=VARCHAR},
+      owner_id = #{ownerId,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      draft = #{draft,jdbcType=TINYINT},
+      created_on = #{createdOn,jdbcType=TIMESTAMP},
+      modifed_on = #{modifedOn,jdbcType=TIMESTAMP},
+      published_on = #{publishedOn,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      location_id = #{locationId,jdbcType=INTEGER},
+      sort_order = #{sortOrder,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

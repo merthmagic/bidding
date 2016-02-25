@@ -1,0 +1,7 @@
+{"properties": [
+  {
+    "name": "mybatis.mapper-locations",
+    "type": "java.lang.String",
+    "description": "A description for 'mybatis.mapper-locations'"
+  }
+]}
