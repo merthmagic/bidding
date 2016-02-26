@@ -1,7 +1,7 @@
 spring:
   datasource:
-    username: root
-    password: 
+    username: bidding
+    password: mypwd
     url: jdbc:mysql://localhost:3306/bidding
     driver-class-name: com.mysql.jdbc.Driver
 
