@@ -2,6 +2,7 @@ package org.xemi.bidding.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,13 @@ public class BidController extends BaseController{
 	}
 	
 	@RequestMapping(value="/bids",method=RequestMethod.POST)
-	public void addBid(BidModel bidModel){
-		
+	public void addBid(@RequestBody BidModel bidModel){
+		try{
+			bidService.addBid(bidModel);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+			response.setStatus(500);;
+		}
 	}
 }

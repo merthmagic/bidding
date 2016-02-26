@@ -22,6 +22,4 @@ public class BidDaoImpl implements BidDao{
 	public int addBid(Bid bid) {
 		return bidMapper.insert(bid);
 	}
-
-	
 }
