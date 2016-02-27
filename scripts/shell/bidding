@@ -1,0 +1,48 @@
+#!/bin/sh
+
+USER=bidding
+
+BIDDING_PATH=/opt/bidding/bin
+BIDDING_PID_FILE=/opt/bidding/run/bidding.pid
+JAVA_PATH=/opt/jdk8/jdk1.8.0_65/bin
+DAEMON_ARGS="-jar $BIDDING_PATH/bidding-0.0.1-SNAPSHOT.jar"
+
+start_bidding(){
+	/usr/bin/start-stop-daemon \
+		--start \
+		--background \
+		--chuid $USER \
+		--pidfile $BIDDING_PID_FILE \
+		--make-pidfile \
+		--exec $JAVA_PATH/java -- $DAEMON_ARGS 
+}
+
+stop_bidding(){
+	/usr/bin/start-stop-daemon \
+		--stop \
+		--user $USER \
+		--pidfile $BIDDING_PID_FILE
+}
+
+case "$1" in
+	start)
+		echo "Starting bidding server..."
+		start_bidding
+		;;
+	stop)
+		echo "Stopping bidding server..."
+		stop_bidding
+		;;
+	restart)
+		echo "Stopping bidding server..."
+		stop_bidding
+		echo "Starting bidding server..."
+		start_bidding
+		;;
+	*)
+		echo "Usage: ./bidding {start|stop|restart}"
+		exit 2
+		;;
+esac
+
+exit 0
