@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = "org.xemi.bidding,org.xemi.bidding.services,org.xemi.bidding.controllers,org.xemi.bidding.dao")
+@ComponentScan(basePackages = "org.xemi.bidding")
 @EnableAutoConfiguration
 public class BiddingServerProjectApplication {
 

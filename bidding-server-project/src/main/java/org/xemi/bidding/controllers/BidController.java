@@ -33,4 +33,12 @@ public class BidController extends BaseController{
 			response.setStatus(500);;
 		}
 	}
+	
+	@RequestMapping(value="/bids/detail/{id}",method=RequestMethod.GET)
+	public BidModel getBidDetail(@PathVariable Long id){
+		BidModel bidModel = bidService.getBidModelById(id);
+		if(bidModel == null)
+			response.setStatus(404);
+		return bidModel;
+	}
 }
