@@ -18,39 +18,36 @@ public class JwtInterceptor implements HandlerInterceptor {
 
 	@Resource
 	private RsaJsonWebKey rsaJsonWebKey;
-	
+
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, ModelAndView arg3)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		String jwt = request.getHeader("Authorization");
 		boolean ret = false;
-		JwtConsumer jwtConsumer = new JwtConsumerBuilder()
-	            .setRequireExpirationTime() 
-	            .setAllowedClockSkewInSeconds(30) 
-	            //.setRequireSubject()
-	            .setExpectedIssuer("Bidding-Server") 
-	            .setExpectedAudience("Bidding-Client") 
-	            .setVerificationKey(rsaJsonWebKey.getKey()) 
-	            .build(); 
-		try{
-			//TODO: the claims should be put into some where to consumed by controllers.
+		JwtConsumer jwtConsumer = new JwtConsumerBuilder().setRequireExpirationTime().setAllowedClockSkewInSeconds(30)
+				// .setRequireSubject()
+				.setExpectedIssuer("Bidding-Server").setExpectedAudience("Bidding-Client")
+				.setVerificationKey(rsaJsonWebKey.getKey()).build();
+		try {
+			// TODO: the claims should be put into some where to consumed by
+			// controllers.
 			JwtClaims jwtClaims = jwtConsumer.processToClaims(jwt);
 			ret = true;
-		}
-		catch(InvalidJwtException e){
+		} catch (InvalidJwtException e) {
 			response.setStatus(401);
 			e.printStackTrace();
 		}
