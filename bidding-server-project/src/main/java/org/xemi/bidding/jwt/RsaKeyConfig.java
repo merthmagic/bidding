@@ -7,6 +7,7 @@ import java.security.spec.X509EncodedKeySpec;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.KeyFactory;
 import java.security.NoSuchAlgorithmException;
@@ -14,12 +15,16 @@ import java.security.PrivateKey;
 import java.security.interfaces.RSAPrivateKey;
 
 import org.jose4j.jwk.RsaJsonWebKey;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.apache.commons.codec.binary.Base64;
 
 @Configuration
 public class RsaKeyConfig {
+	
+	private final Logger logger = LoggerFactory.getLogger(RsaKeyConfig.class);
 
 	private final String privateKeyBase64 = this.readStringFromFile("private.key");
 	private final String publicKeyBase64 = this.readStringFromFile("public.key");
@@ -63,8 +68,9 @@ public class RsaKeyConfig {
 		try {
 
 			String encoding = "utf-8";
-			File file = new File(RsaKeyConfig.class.getResource(fileName).getFile());
-			InputStreamReader read = new InputStreamReader(new FileInputStream(file), encoding);
+			InputStream inputStream = this.getClass().getResourceAsStream(fileName);
+			//logger.info(file.getPath());
+			InputStreamReader read = new InputStreamReader(inputStream, encoding);
 			BufferedReader bufferedReader = new BufferedReader(read);
 			String line = null;
 			while ((line = bufferedReader.readLine()) != null) {

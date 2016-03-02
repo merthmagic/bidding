@@ -2,7 +2,7 @@ spring:
   datasource:
     username: bidding
     password: mypwd
-    url: jdbc:mysql://localhost:3306/bidding?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/bidding?useUnicode=true&characterEncoding=utf-8&autoReconnect=true
     driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
